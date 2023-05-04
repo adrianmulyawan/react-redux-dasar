@@ -1,0 +1,34 @@
+{
+  "contacts": [
+    { 
+      "id": 1, 
+      "name": "Adrian Mulyawan", 
+      "email": "adrianmulyawan@gmail.com",
+      "phoneNumber": "082154590559" 
+    },
+    { 
+      "id": 2, 
+      "name": "Budi Sudarsono", 
+      "email": "budisudarsono@gmail.com",
+      "phoneNumber": "082154590559" 
+    },
+    { 
+      "id": 3, 
+      "name": "Putri Wulandari", 
+      "email": "putriwulandari@gmail.com",
+      "phoneNumber": "082154590559" 
+    },
+    { 
+      "id": 4, 
+      "name": "Icha Puspita", 
+      "email": "puspita.icha@gmail.com",
+      "phoneNumber": "082154590559" 
+    },
+    { 
+      "id": 5, 
+      "name": "Ahmad Subarjo", 
+      "email": "hello.ahmad@gmail.com",
+      "phoneNumber": "082154590559" 
+    }
+  ]
+}
