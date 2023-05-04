@@ -13,10 +13,19 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+// > import reducers yang telah dicombine
+import reducers from './reducers'
+
+// > Buat storenya
+// => store digunakan sebagai wadah untuk menyimpan state dari sebuah aplikasi
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
