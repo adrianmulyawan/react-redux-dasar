@@ -88,7 +88,7 @@ const FormContactComponent = () => {
       }
       j++;
     }
-  }, [detailContactFulfilled, j]);
+  }, [detailContactFulfilled, dispatch, j]);
 
   return (
     <>
