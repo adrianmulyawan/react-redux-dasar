@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListContacts } from '../../actions/contact.action';
+import { deleteContact, getListContacts } from '../../actions/contact.action';
 
 const CardContactComponent = () => {
   // > Consume state ke ui
@@ -12,6 +12,12 @@ const CardContactComponent = () => {
 
   // > dispatch digunakan untuk menghubungkan component view dengan action dan reducers
   const dispatch = useDispatch();
+
+  // > useSelector
+  // => kita manfaatkan untuk render ulang card
+  // => apabila didalam reducers ini telah terdapat data baru
+  // => kita implementasikan menggunakan useEffect
+  const { deleteContactFulfilled } = useSelector((state) => state.contactReducer);
 
   // > useEffect untuk ambil seluruh data contact
   let i = 0;
@@ -25,6 +31,35 @@ const CardContactComponent = () => {
       dispatch(getListContacts());
     }
   }, [dispatch, i]);
+
+  // > handle button delete contact
+  const handleDeleteContact = (event) => {
+    console.info('1. Masuk kedalam handle button delete di tekan');
+
+    const id = event.target.value;
+
+    const confirmation = window.confirm('Are you sure to delete data?');
+
+    if (confirmation === true) {
+      dispatch(deleteContact(id));
+      alert('Success delete data!');
+    }
+  };
+
+  // > useEffect untuk handle load data contact
+  // => setelah data berhasil dihapus
+  // => kondisinya bila deleteContactFulfilled = true
+  let j = 0;
+  useEffect(() => {
+    if (j === 0) {
+      console.info('5. Render ulang list contact bila deleteContactFullfilled = true');
+      if (deleteContactFulfilled) {
+        // => render ulang contact bila deleteContactFulfilled = true
+        dispatch(getListContacts());
+      }
+      j++;
+    }
+  }, [dispatch, deleteContactFulfilled, j]);
 
   return (
     <>
@@ -66,7 +101,7 @@ const CardContactComponent = () => {
                         </p>
                         <div className="button-action">
                           <button className='btn btn-success'>Edit</button>
-                          <button className='btn btn-danger mx-2'>Delete</button>
+                          <button className='btn btn-danger mx-2' value={ data.id } onClick={ handleDeleteContact }>Delete</button>
                         </div>
                         </div>
                     </div>
