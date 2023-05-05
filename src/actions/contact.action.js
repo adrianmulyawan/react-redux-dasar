@@ -152,9 +152,7 @@ export const detailContact = (data) => {
     dispatch({
       type: DETAIL_CONTACT,
       payload: {
-        loading: false,
         data: data,
-        errorMessage: false,
       },
     });
   };
