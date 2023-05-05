@@ -18,7 +18,7 @@ import reducers from './reducers'
 
 // > Buat storenya
 // => store digunakan sebagai wadah untuk menyimpan state dari sebuah aplikasi
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
+const store = createStore(reducers, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
