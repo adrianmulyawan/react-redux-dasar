@@ -6,6 +6,7 @@ import axios from "axios";
 export const GET_LIST_CONTACT = "GET_LIST_CONTACT";
 export const INSERT_NEW_CONTACT = "INSERT_NEW_CONTACT";
 export const DELETE_CONTACT = "DELETE_CONTACT";
+export const DETAIL_CONTACT = "DETAIL_CONTACT";
 
 // > Aksi untuk dapatkan seluruh data kontak
 export const getListContacts = () => {
@@ -141,5 +142,20 @@ export const deleteContact = (id) => {
         },
       });
     };
+  };
+};
+
+// > Action untuk mendapatkan detail contact
+export const detailContact = (data) => {
+  return (dispatch) => {
+    // => kondisi data ditemukan (tidak menggunakan api)
+    dispatch({
+      type: DETAIL_CONTACT,
+      payload: {
+        loading: false,
+        data: data,
+        errorMessage: false,
+      },
+    });
   };
 };
