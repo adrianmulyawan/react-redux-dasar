@@ -3,21 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, detailContact, getListContacts } from '../../actions/contact.action';
 
 const CardContactComponent = () => {
-  // > Consume state ke ui
+  // 1.) getListContactsLoading, getListContactsFulfilled, getListContactsRejected
+  // => Consume state ke ui
+  // 2.) deleteContactFulfilled
+  // => kita manfaatkan untuk render ulang card
+  // => apabila didalam reducers ini telah terdapat data baru
+  // => kita implementasikan menggunakan useEffect
   const { 
     getListContactsLoading,
     getListContactsFulfilled,
     getListContactsRejected,
+    deleteContactFulfilled
   } = useSelector((state) => state.contactReducer);
 
   // > dispatch digunakan untuk menghubungkan component view dengan action dan reducers
   const dispatch = useDispatch();
-
-  // > useSelector
-  // => kita manfaatkan untuk render ulang card
-  // => apabila didalam reducers ini telah terdapat data baru
-  // => kita implementasikan menggunakan useEffect
-  const { deleteContactFulfilled } = useSelector((state) => state.contactReducer);
 
   // > useEffect untuk ambil seluruh data contact
   let i = 0;
