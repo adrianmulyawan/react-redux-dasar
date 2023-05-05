@@ -5,7 +5,8 @@
 import { 
   GET_LIST_CONTACT,
   INSERT_NEW_CONTACT,
-  DELETE_CONTACT
+  DELETE_CONTACT,
+  DETAIL_CONTACT
 } from "../../actions/contact.action";
 
 const initialState = {
@@ -23,6 +24,9 @@ const initialState = {
   deleteContactLoading: false,
   deleteContactFulfilled: false,
   deleteContactRejected: false,
+
+  // > State Untuk detailContact
+  detailContactFulfilled: false,
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -54,6 +58,13 @@ const contactReducer = (state = initialState, action) => {
         deleteContactLoading: action.payload.loading,
         deleteContactFulfilled: action.payload.data,
         deleteContactRejected: action.payload.errorMessage
+      };
+    case DETAIL_CONTACT: 
+      console.info(action.payload, '4. Masuk kedalam reducers detailContact');
+
+      return {
+        ...state,
+        detailContactFulfilled: action.payload.data,
       };
     default:
       return state;
