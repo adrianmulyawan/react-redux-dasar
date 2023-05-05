@@ -6,7 +6,8 @@ import {
   GET_LIST_CONTACT,
   INSERT_NEW_CONTACT,
   DELETE_CONTACT,
-  DETAIL_CONTACT
+  DETAIL_CONTACT,
+  UPDATE_CONTACT
 } from "../../actions/contact.action";
 
 const initialState = {
@@ -27,6 +28,11 @@ const initialState = {
 
   // > State Untuk detailContact
   detailContactFulfilled: false,
+
+  // > State Untuk updateContact
+  updateContactLoading: false,
+  updateContactFulfilled: false,
+  updateContactRejected: false
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -65,6 +71,15 @@ const contactReducer = (state = initialState, action) => {
       return {
         ...state,
         detailContactFulfilled: action.payload.data,
+      };
+    case UPDATE_CONTACT:
+      console.info(action.payload, '4. Masuk kedalam reducers updateContact');
+
+      return {
+        ...state,
+        updateContactLoading: action.payload.loading,
+        updateContactFulfilled: action.payload.data,
+        updateContactRejected: action.payload.errorMessage
       };
     default:
       return state;
