@@ -5,6 +5,7 @@ import axios from "axios";
 // => Digunakan didalam case 
 export const GET_LIST_CONTACT = "GET_LIST_CONTACT";
 export const INSERT_NEW_CONTACT = "INSERT_NEW_CONTACT";
+export const DELETE_CONTACT = "DELETE_CONTACT";
 
 // > Aksi untuk dapatkan seluruh data kontak
 export const getListContacts = () => {
@@ -88,6 +89,51 @@ export const insertNewContact = (data) => {
 
       dispatch({
         type: INSERT_NEW_CONTACT,
+        payload: {
+          loading: false,
+          data: false,
+          errorMessage: error.message,
+        },
+      });
+    };
+  };
+};
+
+// > Action untuk handle proses hapus data contact
+export const deleteContact = (id) => {
+  console.info('2. Masuk kedalam action deleteContact');
+
+  return async (dispatch) => {
+    // => handle ketika proses delete data masih loading
+    dispatch({
+      type: DELETE_CONTACT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // => handle ketika proses delete data fulfilled
+    try {
+      const response = await axios.delete(`http://localhost:3004/contacts/${id}`);
+      console.info(response.data, `3. Data dengan id = ${id} berhasil dihapus`);
+
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: {
+          loading: false,
+          data: response.data,
+          errorMessage: false,
+        },
+      });
+    } 
+    // => handle ketika proses delete data rejectex
+    catch (error) {
+      console.info(error.message, `3. Data dengan id = ${id} gagal dihapus`);
+
+      dispatch({
+        type: DELETE_CONTACT,
         payload: {
           loading: false,
           data: false,
