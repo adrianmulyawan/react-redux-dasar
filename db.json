@@ -1,34 +1,52 @@
 {
   "contacts": [
-    { 
-      "id": 1, 
-      "name": "Adrian Mulyawan", 
+    {
+      "id": 1,
+      "name": "Adrian Mulyawan",
       "email": "adrianmulyawan@gmail.com",
-      "phoneNumber": "082154590559" 
+      "phoneNumber": "082154590559"
     },
-    { 
-      "id": 2, 
-      "name": "Budi Sudarsono", 
+    {
+      "id": 2,
+      "name": "Budi Sudarsono",
       "email": "budisudarsono@gmail.com",
-      "phoneNumber": "082154590559" 
+      "phoneNumber": "082154590559"
     },
-    { 
-      "id": 3, 
-      "name": "Putri Wulandari", 
+    {
+      "id": 3,
+      "name": "Putri Wulandari",
       "email": "putriwulandari@gmail.com",
-      "phoneNumber": "082154590559" 
+      "phoneNumber": "082154590559"
     },
-    { 
-      "id": 4, 
-      "name": "Icha Puspita", 
+    {
+      "id": 4,
+      "name": "Icha Puspita",
       "email": "puspita.icha@gmail.com",
-      "phoneNumber": "082154590559" 
+      "phoneNumber": "082154590559"
     },
-    { 
-      "id": 5, 
-      "name": "Ahmad Subarjo", 
+    {
+      "id": 5,
+      "name": "Ahmad Subarjo",
       "email": "hello.ahmad@gmail.com",
-      "phoneNumber": "082154590559" 
+      "phoneNumber": "082154590559"
+    },
+    {
+      "name": "Maysaroh",
+      "email": "maysaroh@gmail.com",
+      "phoneNumber": "089694391655",
+      "id": 6
+    },
+    {
+      "name": "Muriyadi",
+      "email": "muriyadi.aja@gmail.com",
+      "phoneNumber": "081258161143",
+      "id": 7
+    },
+    {
+      "name": "Misabahul Putra",
+      "email": "misbahulptr@gmail.com",
+      "phoneNumber": "089640001855",
+      "id": 8
     }
   ]
 }
