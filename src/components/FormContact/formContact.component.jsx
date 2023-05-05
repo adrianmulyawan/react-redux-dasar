@@ -1,21 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getListContacts, insertNewContact } from '../../actions/contact.action';
 
 const FormContactComponent = () => {
+  // > state
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
+  // > data yang akan dikirim ke action insetNewContact
   const data = {
     name,
     email,
     phoneNumber
   };
 
+  // > dispatch
+  // => digunakan untuk mengirimkan data kedalam action
+  const dispatch = useDispatch();
+
+  // > useSelector
+  // => kita manfaatkan untuk render ulang card
+  // => apabila didalam reducers ini telah terdapat data baru
+  // => kita implementasikan menggunakan useEffect
+  const { insertNewContactFulfilled } = useSelector((state) => state.contactReducer);
+
+  // > handler form
   const handleInputContact = (event) => {
+    console.info('1. Masuk kedalam handle ketika form disubmit');
+
     event.preventDefault();
 
-    console.info(data);
-  }
+    // > jalankan insertNewContact disini
+    // => dengan menggunakan dispatch
+    dispatch(insertNewContact(data));
+
+    // > balikan nilai state
+    setName('');
+    setEmail('');
+    setPhoneNumber('');
+  };
+
+  // > useEffect untuk getDataContacts
+  // => dijalankan setelah berhasil insert data
+  let i = 0;
+  useEffect(() => {
+    if (i === 0) {
+      // > jika 'insertNewContactFulfilled' = true (ada perubahan)
+      // => update datanya
+      if (insertNewContactFulfilled) {
+        console.info('1. Render ulang data');
+        dispatch(getListContacts());
+      }
+      i++
+    }
+  }, [insertNewContactFulfilled, dispatch, i]);
 
   return (
     <>
