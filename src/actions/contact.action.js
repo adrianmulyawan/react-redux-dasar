@@ -7,6 +7,7 @@ export const GET_LIST_CONTACT = "GET_LIST_CONTACT";
 export const INSERT_NEW_CONTACT = "INSERT_NEW_CONTACT";
 export const DELETE_CONTACT = "DELETE_CONTACT";
 export const DETAIL_CONTACT = "DETAIL_CONTACT";
+export const UPDATE_CONTACT = "UPDATE_CONTACT";
 
 // > Aksi untuk dapatkan seluruh data kontak
 export const getListContacts = () => {
@@ -159,5 +160,50 @@ export const detailContact = (data) => {
         data: data,
       },
     });
+  };
+};
+
+// > Aksi untuk update data contact
+export const updateContact = (data) => {
+  console.info('2. Masuk kedalam updateContact action');
+
+  return async (dispatch) => {
+    // => Handle ketika data loading
+    dispatch({
+      type: UPDATE_CONTACT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // => Handle ketika data contact fulfilled
+    try {
+      const response = await axios.put(`http://localhost:3004/contacts/${data.id}`, data);
+      console.info(response.data, '3. Success update data!');
+
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: {
+          loading: false,
+          data: response.data,
+          errorMessage: false,
+        },
+      });      
+    } 
+    // => Handle ketika data contact rejected
+    catch (error) {
+      console.info(error.message, '3. Gagal update data!');
+
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: {
+          loading: false,
+          data: false,
+          errorMessage: error.message,
+        },
+      });
+    }
   };
 };
