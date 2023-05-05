@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, getListContacts } from '../../actions/contact.action';
+import { deleteContact, detailContact, getListContacts } from '../../actions/contact.action';
 
 const CardContactComponent = () => {
   // > Consume state ke ui
@@ -100,7 +100,7 @@ const CardContactComponent = () => {
                           Phone Number: { data.phoneNumber }
                         </p>
                         <div className="button-action">
-                          <button className='btn btn-success'>Edit</button>
+                          <button className='btn btn-success' onClick={ () => dispatch(detailContact(data)) }>Edit</button>
                           <button className='btn btn-danger mx-2' value={ data.id } onClick={ handleDeleteContact }>Delete</button>
                         </div>
                         </div>
