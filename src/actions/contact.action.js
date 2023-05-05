@@ -147,7 +147,11 @@ export const deleteContact = (id) => {
 
 // > Action untuk mendapatkan detail contact
 export const detailContact = (data) => {
+  console.info('2. Masuk kedalam detailContact action');
+
   return (dispatch) => {
+    console.info(data, '3. detail contact');
+
     // => kondisi data ditemukan (tidak menggunakan api)
     dispatch({
       type: DETAIL_CONTACT,
