@@ -4,7 +4,8 @@
 // > import constant variable
 import { 
   GET_LIST_CONTACT,
-  INSERT_NEW_CONTACT
+  INSERT_NEW_CONTACT,
+  DELETE_CONTACT
 } from "../../actions/contact.action";
 
 const initialState = {
@@ -17,6 +18,11 @@ const initialState = {
   insertNewContactLoading: false,
   insertNewContactFulfilled: false,
   insertNewContactRejected: false,
+
+  // > State Untuk deleteContact
+  deleteContactLoading: false,
+  deleteContactFulfilled: false,
+  deleteContactRejected: false,
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -39,6 +45,15 @@ const contactReducer = (state = initialState, action) => {
         insertNewContactLoading: action.payload.loading,
         insertNewContactFulfilled: action.payload.data,
         insertNewContactRejected: action.payload.errorMessage
+      };
+    case DELETE_CONTACT: 
+      console.info(action.payload, '4. Masuk kedalam reducers deleteContact');
+
+      return {
+        ...state,
+        deleteContactLoading: action.payload.loading,
+        deleteContactFulfilled: action.payload.data,
+        deleteContactRejected: action.payload.errorMessage
       };
     default:
       return state;
