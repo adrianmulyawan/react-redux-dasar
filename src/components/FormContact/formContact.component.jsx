@@ -52,6 +52,7 @@ const FormContactComponent = () => {
     }
 
     // > balikan nilai state
+    setId('');
     setName('');
     setEmail('');
     setPhoneNumber('');
