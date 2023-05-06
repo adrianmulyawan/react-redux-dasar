@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteStudent, getAllStudents } from '../../actions/student.action';
+import { deleteStudent, detailStudent, getAllStudents } from '../../actions/student.action';
 
 const TableStudentComponent = () => {
   // > useDispatch
@@ -104,7 +104,7 @@ const TableStudentComponent = () => {
                       { student.major }
                     </td>
                     <td className="text-center">
-                      <button className="badge bg-success">Edit</button>
+                      <button className="badge bg-success" onClick={ () => dispatch(detailStudent(student)) }>Edit</button>
                       <button className="badge bg-danger mx-2" value={ student.id } onClick={ handleDeleteStudent }>Delete</button>
                     </td>
                   </tr>
