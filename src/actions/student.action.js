@@ -5,6 +5,7 @@ import axios from "axios";
 export const GET_ALL_STUDENTS = "GET_ALL_STUDENTS";
 export const ADD_STUDENT = "ADD_STUDENT";
 export const DELETE_STUDENT = "DELETE_STUDENT";
+export const DETAIL_STUDENT = "DETAIL_STUDENT";
 
 // > Action untuk mendapatkan seluruh data students
 export const getAllStudents = () => {
@@ -98,7 +99,7 @@ export const addStudent = (data) => {
 // > Action untuk hapus data student
 export const deleteStudent = (id) => {
   console.info('Masuk kedalam action deleteStudent');
-  
+
   return async (dispatch) => {
     // => handle untuk loading data
     dispatch({
@@ -137,5 +138,22 @@ export const deleteStudent = (id) => {
         },
       });
     }
+  };
+};
+
+// > Action untuk menampilkan detail data student
+export const detailStudent = (data) => {
+  console.info('Masuk kedalam action detailContact');
+
+  return (dispatch) => {
+    console.info(data, 'Data kontak berhasil didapatkan');
+
+    // => handle ketika data student berhasil didapatkan (fulfilled)
+    dispatch({
+      type: DETAIL_STUDENT,
+      payload: {
+        data: data
+      },
+    });
   };
 };
