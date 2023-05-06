@@ -43,8 +43,8 @@ const FormStudentComponent = () => {
   let i = 0;
   useEffect(() => {
     if (i === 0) {
-      console.info('Render data ulang');
       if (addStudentFulfilled) {
+        console.info('Render data ulang');
         dispatch(getAllStudents());
       }
       i++;
