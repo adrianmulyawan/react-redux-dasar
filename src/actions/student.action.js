@@ -4,6 +4,7 @@ import axios from "axios";
 // => akan diimport kedalam reducer dan digunakan didalam case
 export const GET_ALL_STUDENTS = "GET_ALL_STUDENTS";
 export const ADD_STUDENT = "ADD_STUDENT";
+export const DELETE_STUDENT = "DELETE_STUDENT";
 
 // > Action untuk mendapatkan seluruh data students
 export const getAllStudents = () => {
@@ -88,6 +89,51 @@ export const addStudent = (data) => {
           loading: false,
           data: false,
           errorMessage: error.message,
+        },
+      });
+    }
+  };
+};
+
+// > Action untuk hapus data student
+export const deleteStudent = (id) => {
+  console.info('Masuk kedalam action deleteStudent');
+  
+  return async (dispatch) => {
+    // => handle untuk loading data
+    dispatch({
+      type: DELETE_STUDENT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // => handle untuk data berhasil dihapus
+    try {
+      const response = await axios.delete(`http://localhost:3004/students/${id}`);
+      console.info(response.data, 'Data berhasil dihapus');
+
+      dispatch({
+        type: DELETE_STUDENT,
+        payload: {
+          loading: false,
+          data: response.data,
+          errorMessage: false,
+        },
+      });
+    } 
+    // => handle untuk data gagal dihapus
+    catch (error) {
+      console.info(error.message, 'Data gagal dihapus');
+
+      dispatch({
+        type: DELETE_STUDENT,
+        payload: {
+          loading: false,
+          data: false,
+          errorMessage: error.message
         },
       });
     }

@@ -1,6 +1,7 @@
 import { 
   GET_ALL_STUDENTS,
-  ADD_STUDENT
+  ADD_STUDENT,
+  DELETE_STUDENT
 } from "../../actions/student.action";
 
 const initialState = {
@@ -15,6 +16,11 @@ const initialState = {
   addStudentLoading: false,
   addStudentFulfilled: false,
   addStudentRejected: false,
+
+  // > State untuk action deleteStudent
+  deleteStudentLoading: false,
+  deleteStudentFulfilled: false,
+  deleteStudentRejected: false,
 };
 
 const studentReducer = (state = initialState, action) => {
@@ -36,6 +42,15 @@ const studentReducer = (state = initialState, action) => {
         addStudentLoading: action.payload.loading,
         addStudentFulfilled: action.payload.data,
         addStudentRejected: action.payload.errorMessage
+      };
+    case DELETE_STUDENT:
+      console.info(action.payload, 'Masuk kedalam reducers deleteStudent');
+
+      return {
+        ...state,
+        deleteStudentLoading: action.payload.loading,
+        deleteStudentFulfilled: action.payload.data,
+        deleteStudentRejected: action.payload.errorMessage
       };
     default:
       return state;
