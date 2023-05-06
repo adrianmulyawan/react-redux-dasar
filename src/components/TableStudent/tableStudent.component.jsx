@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllStudents } from '../../actions/student.action';
+import { deleteStudent, getAllStudents } from '../../actions/student.action';
 
 const TableStudentComponent = () => {
   // > useDispatch
@@ -16,6 +16,7 @@ const TableStudentComponent = () => {
     getAllStudentsLoading,
     getAllStudentsFulfilled,
     getAllStudentsRejected,
+    deleteStudentFulfilled
   } = useSelector((state) => state.studentReducer);
 
 
@@ -28,6 +29,34 @@ const TableStudentComponent = () => {
       i++;
     }
   }, [dispatch, i]);
+
+  // > handler delete student
+  const handleDeleteStudent = (event) => {
+    const idStudent = event.target.value;
+
+    console.info('Masuk kedalam handle hapus data student');
+
+    const confirmation = window.confirm('Are you sure?');
+
+    if (confirmation === true) {
+      dispatch(deleteStudent(idStudent));
+      alert('Success delete student');
+    }
+  };
+
+  // > useEffect untuk render data student bila data berhasil dihapus
+  let j = 0;
+  useEffect(() => {
+    if (j === 0) {
+      // => jika state deleteStudentFulfilled != false
+      if (deleteStudentFulfilled) {
+        console.info('Render ulang data');
+        // => render ulang datanya
+        dispatch(getAllStudents());
+      }
+      j++;
+    }
+  }, [dispatch, deleteStudentFulfilled, j]);
 
   return (
     <>
@@ -76,7 +105,7 @@ const TableStudentComponent = () => {
                     </td>
                     <td className="text-center">
                       <button className="badge bg-success">Edit</button>
-                      <button className="badge bg-danger mx-2">Delete</button>
+                      <button className="badge bg-danger mx-2" value={ student.id } onClick={ handleDeleteStudent }>Delete</button>
                     </td>
                   </tr>
                 )
