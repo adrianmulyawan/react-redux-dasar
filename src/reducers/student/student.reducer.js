@@ -1,4 +1,7 @@
-import { GET_ALL_STUDENTS } from "../../actions/student.action";
+import { 
+  GET_ALL_STUDENTS,
+  ADD_STUDENT
+} from "../../actions/student.action";
 
 const initialState = {
   // > State untuk action getAllStudents
@@ -6,6 +9,12 @@ const initialState = {
   getAllStudentsLoading: false, // kondisi ketika data loading
   getAllStudentsFulfilled: false, // kondisi ketika data fulfilled
   getAllStudentsRejected: false, // kondisi ketika data rejected
+
+  // > State untuk action addContact
+  // => kondisi awalnya state bernilai false
+  addStudentLoading: false,
+  addStudentFulfilled: false,
+  addStudentRejected: false,
 };
 
 const studentReducer = (state = initialState, action) => {
@@ -18,6 +27,15 @@ const studentReducer = (state = initialState, action) => {
         getAllStudentsLoading: action.payload.loading,
         getAllStudentsFulfilled: action.payload.data,
         getAllStudentsRejected: action.payload.errorMessage
+      };
+    case ADD_STUDENT:
+      console.info(action.payload, 'Masuk kedalam reducers addStudent');
+      
+      return {
+        ...state,
+        addStudentLoading: action.payload.loading,
+        addStudentFulfilled: action.payload.data,
+        addStudentRejected: action.payload.errorMessage
       };
     default:
       return state;
