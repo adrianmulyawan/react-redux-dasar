@@ -1,16 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addStudent, getAllStudents } from '../../actions/student.action';
 
 const FormStudentComponent = () => {
+  // > state
   const [nim, setNim] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [jurusan, setJurusan] = useState('');
+  const [major, setMajor] = useState('');
 
+  // > data yang akan dikirim kedalam action
+  const insertData = {
+    nim, name, email, major
+  };
+
+  // > dispatch
+  // => digunakan sebagai penghubung component view dengan action dan reducer
+  const dispatch = useDispatch();
+
+  // > selector 
+  // => digunakan untuk menghandle reducers
+  // 1. addContactFulfilled: jika ada perubahan pada statenya akan kita jalankan di useEffect untuk render table ulang 
+  const { addStudentFulfilled } = useSelector((state) => state.studentReducer);
+
+  // > method untuk handle form
   const handleInsertStudent = (e) => {
     e.preventDefault();
 
-    console.info(nim, name, email, jurusan, '=> data students');
+    console.info('Masuk kedalam handle insert data');
+
+    // > Tambah data student baru
+    dispatch(addStudent(insertData));
+
+    // > set ulang form
+    setNim('');
+    setName('');
+    setEmail('');
+    setMajor('');
   };
+
+  // > digunakan untuk render table ulang jika ada insert data baru
+  let i = 0;
+  useEffect(() => {
+    if (i === 0) {
+      console.info('Render data ulang');
+      if (addStudentFulfilled) {
+        dispatch(getAllStudents());
+      }
+      i++;
+    }
+  }, [dispatch, addStudentFulfilled, i]);
 
   return (
     <>
@@ -30,8 +69,8 @@ const FormStudentComponent = () => {
             <input type="email" className="form-control" id="email" placeholder='Your Email' name='email' value={ email } onChange={ (e) => setEmail(e.target.value) } required />
           </div>
           <div className="mb-3">
-            <label htmlFor="jurusan" className="form-label">Major</label>
-            <input type="text" className="form-control" id="jurusan" placeholder='Your Major' name='jurusan' value={ jurusan } onChange={ (e) => setJurusan(e.target.value) } required />
+            <label htmlFor="major" className="form-label">Major</label>
+            <input type="text" className="form-control" id="major" placeholder='Your Major' name='major' value={ major } onChange={ (e) => setMajor(e.target.value) } required />
           </div>
           <div className="d-grid gap-2">
             <button className="btn btn-primary" type='submit'>
