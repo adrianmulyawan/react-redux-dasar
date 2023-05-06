@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllStudents } from '../../actions/student.action';
 
 const TableStudentComponent = () => {
+  // > useDispatch
+  // => Instansiasi dispatch dan tampung kedalam variable 'dispatch'
+  // => kita gunakan sebagai penghubung view component ke action dan reducers
+  const dispatch = useDispatch();
+
+  // > selector 
+  // => kita gunakan untuk menghandle reducers
+  // # reducer digunakan untuk mengolah state yang berasal dari store
+  // # store digunakan sebagai wadah penampung state
+  const {
+    getAllStudentsLoading,
+    getAllStudentsFulfilled,
+    getAllStudentsRejected,
+  } = useSelector((state) => state.studentReducer);
+
+
+  // > useEffect untuk menjalankan action getAllStudents
+  let i = 0;
+  useEffect(() => {
+    if (i === 0) {
+      console.info('Masuk kedalam useEffect di component tableStudent');
+      dispatch(getAllStudents());
+      i++;
+    }
+  }, [dispatch, i]);
+
   return (
     <>
       <h5 className='my-3'>Data Students</h5>
       <div className="card p-3">
-      <table class="table table-responsive table-bordered">
+      <table className="table table-responsive table-bordered">
         <thead>
           <tr>
             <th scope="col" className='text-center'>No</th>
@@ -17,17 +45,52 @@ const TableStudentComponent = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row" className='text-center'>1</th>
-            <td className='text-center'>15523115</td>
-            <td className='text-center'>Adrian Mulyawan</td>
-            <td className='text-center'>adrianmulyawan@gmail.com</td>
-            <td className='text-center'>Computer Science</td>
-            <td className="text-center">
-              <button class="badge bg-success">Edit</button>
-              <button class="badge bg-danger mx-2">Delete</button>
-            </td>
-          </tr>
+          {/* Jika reducer = loading */}
+          {
+            getAllStudentsLoading && (
+              <tr>
+                <td className='text-center' colSpan={ 6 }>Data Loading...</td>
+              </tr>
+            )
+          }
+          {/* Jika reducer = fulfilled */}
+          {
+            getAllStudentsFulfilled && (
+              getAllStudentsFulfilled.map((student, index) => {
+                return (
+                  <tr key={ student.id }>
+                    <th scope="row" className='text-center'>
+                      { index += 1 }
+                    </th>
+                    <td className='text-center'>
+                      { student.nim }
+                    </td>
+                    <td className='text-center'>
+                      { student.name }
+                    </td>
+                    <td className='text-center'>
+                      { student.email }
+                    </td>
+                    <td className='text-center'>
+                      { student.major }
+                    </td>
+                    <td className="text-center">
+                      <button className="badge bg-success">Edit</button>
+                      <button className="badge bg-danger mx-2">Delete</button>
+                    </td>
+                  </tr>
+                )
+              })
+            )
+          }
+          {/* Jika reducers = rejected */}
+          {
+            getAllStudentsRejected && (
+              <tr>
+                <td className='text-center' colSpan={ 6 }>{ getAllStudentsRejected ? getAllStudentsRejected : 'Data Loading...'}</td>
+              </tr>
+            )
+          }
         </tbody>
       </table>
       </div>
