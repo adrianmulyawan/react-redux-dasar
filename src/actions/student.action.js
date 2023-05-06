@@ -6,6 +6,7 @@ export const GET_ALL_STUDENTS = "GET_ALL_STUDENTS";
 export const ADD_STUDENT = "ADD_STUDENT";
 export const DELETE_STUDENT = "DELETE_STUDENT";
 export const DETAIL_STUDENT = "DETAIL_STUDENT";
+export const UPDATE_STUDENT = "UPDATE_STUDENT";
 
 // > Action untuk mendapatkan seluruh data students
 export const getAllStudents = () => {
@@ -155,5 +156,50 @@ export const detailStudent = (data) => {
         data: data
       },
     });
+  };
+};
+
+// > Action untuk update data student
+export const updateStudent = (data) => {
+  console.info('Masuk kedalam action updateContact');
+
+  return async (dispatch) => {
+    // => handle ketika data loading 
+    dispatch({
+      type: UPDATE_STUDENT,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // => hanlde ketika data berhasil diupdate (fulfilled)
+    try {
+      const response = await axios.put(`http://localhost:3004/students/${data.id}`, data);
+      console.info(response.data, 'Data berhasil diupdate');
+
+      dispatch({
+        type: UPDATE_STUDENT,
+        payload: {
+          loading: false,
+          data: response.data,
+          errorMessage: false,
+        },
+      });
+    } 
+    // => handle ketika data gagal diupdate (rejected)
+    catch (error) {
+      console.info(error.message, 'Data gagal diupdate');
+
+      dispatch({
+        type: UPDATE_STUDENT,
+        payload: {
+          loading: false,
+          data: false,
+          errorMessage: error.message,
+        },
+      });
+    }
   };
 };
