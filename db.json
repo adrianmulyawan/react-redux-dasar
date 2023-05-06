@@ -41,16 +41,16 @@
     {
       "id": 1,
       "nim": "15523115",
-      "name": "Adrian Mulyawan",
-      "email": "adrianmlywn@gmail.com",
+      "name": "M Adrian Mulyawan",
+      "email": "adrianmulyawan@gmail.com",
       "major": "Computer Science"
     },
     {
       "id": 2,
-      "nim": "15521114",
-      "name": "Mandalika Ayusti Nawangsari",
+      "nim": "15523119",
+      "name": "Mandalika Ayusti",
       "email": "mandaysti@gmail.com",
-      "major": "Chemical Engineering"
+      "major": "Computer Science"
     },
     {
       "id": 3,
@@ -74,11 +74,11 @@
       "id": 7
     },
     {
+      "id": 9,
       "nim": "152101112",
-      "name": "M Irfan Djuha",
-      "email": "irfan.djuha@gmail.com",
-      "major": "Law",
-      "id": 9
+      "name": "Irfan Jauhari",
+      "email": "irfan.jauhari@gmail.com",
+      "major": "Law"
     },
     {
       "nim": "14718214",
