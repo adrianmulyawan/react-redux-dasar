@@ -72,6 +72,48 @@
       "name": "Riskita Putri",
       "email": "rputri@gmail.com",
       "major": "Economic and Business"
+    },
+    {
+      "nim": "15523114",
+      "name": "Azki Ridho",
+      "email": "azkiridho@gmail.com",
+      "major": "Computer Science",
+      "id": 6
+    },
+    {
+      "nim": "15523116",
+      "name": "Nazmi Ilham",
+      "email": "nazmilham@gmail.com",
+      "major": "Computer Science",
+      "id": 7
+    },
+    {
+      "nim": "15521115",
+      "name": "Siska",
+      "email": "siska@gmail.com",
+      "major": "Chemical Engineering",
+      "id": 8
+    },
+    {
+      "nim": "152101112",
+      "name": "M Irfan Djuha",
+      "email": "irfan.djuha@gmail.com",
+      "major": "Law",
+      "id": 9
+    },
+    {
+      "nim": "14718214",
+      "name": "Anindita Hidayat",
+      "email": "aninditahidayat@gmail.com",
+      "major": "Economic and Business",
+      "id": 10
+    },
+    {
+      "nim": "152101113",
+      "name": "Miftah Hurayan",
+      "email": "miftah.hurayan@gmail.com",
+      "major": "Law",
+      "id": 11
     }
   ]
 }
